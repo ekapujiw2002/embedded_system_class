@@ -32,6 +32,8 @@ Embedded System Class
 
 # PlatformIO
 
+![](media/pio-avr.png)
+
 ---
 
 # AVR GPIO
