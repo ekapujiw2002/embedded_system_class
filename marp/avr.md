@@ -187,3 +187,5 @@ int main(){
 ---
 
 # Interupsi : Saklar Reaktif
+
+![](media/avr-isr-simulator.png)
