@@ -131,3 +131,59 @@ int main() {
 }
 
 ```
+
+---
+
+# Interupsi
+
+- > Mekanisme untuk menyela sebentar proses yang sedang berjalan di prosesor
+- Asal :
+  - **Hardware Interrupts**
+  - **Software Interrupts**
+- **ISR** : suatu fungsi dengan alamat khusus untuk suatu interupsi
+
+---
+
+# Interupsi : ISR Vector
+
+![](media/isr-vector-m328.png)
+
+---
+
+# Interupsi : Langkah Penggunaan
+
+- Masukkan *header* file interupsi : `#include <avr/interrupt.h>`
+- Aktifkan dan konfigurasi interupsi yang akan dipergunakan serta **ISR**
+- Aktifkan **Global Interrupt Flag** : `sei()`. Untuk mematikan **Global Interrupt Flag** pergunakan `cli()`
+
+---
+
+# Interupsi : Kode Program
+
+```
+#include <avr/interrupt.h>
+
+ISR(vector_isr){
+	// kode service rutin interrupt
+}
+
+int main(){
+	// aktifkan dan konfigurasi interupsi
+    // onkan global isr flag
+    sei();
+    
+    for(;;);
+}
+```
+
+---
+
+# Interupsi : Do and Don't
+
+- Interupsi bersifat **non nested**
+- ISR harus singkat, cepat, jangan aktifkan ISR lainnya!
+- Variabel yang dipergunakan di dalam ISR harus menggunakan flag **volatile** : `volatile int cnt;`
+
+---
+
+# Interupsi : Saklar Reaktif
