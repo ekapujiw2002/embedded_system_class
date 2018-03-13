@@ -1,12 +1,20 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
+#include <util/atomic.h>
+#include <util/delay.h>
 
 #define PIN_LED PINC0
 #define PIN_SW PIND2
 #define PIN_SW2 PIND3
 #define PIN_SW3 PIND7
 
-ISR(INT0_vect) { PORTC ^= _BV(PIN_LED); }
+uint8_t volatile cnt = 0;
+
+ISR(INT0_vect) {
+  PORTC ^= _BV(PIN_LED);
+
+  cnt++;
+}
 // ISR(INT1_vect) { PORTC ^= _BV(PIN_LED); }
 ISR_ALIAS(INT1_vect, INT0_vect);
 
@@ -20,6 +28,9 @@ ISR(PCINT2_vect) {
 }
 
 int main() {
+
+  DDRB = 0xff;
+  PORTB = 0;
 
   DDRC |= _BV(PIN_LED);
   PORTC &= ~_BV(PIN_LED);
@@ -37,8 +48,18 @@ int main() {
 
   sei();
 
-  for (;;)
-    ;
+  for (;;) {
+    ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+      PORTB = (cnt & 0x0f);
+      if (cnt == 10) {
+        cnt = 0;
+      }
+
+      // _delay_ms(100);
+    }
+
+    _delay_ms(20);
+  }
 
   return 0;
 }
