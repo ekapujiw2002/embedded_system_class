@@ -189,3 +189,42 @@ int main(){
 # Interupsi : Saklar Reaktif
 
 ![](media/avr-isr-simulator.png)
+
+---
+
+# Serial Port
+
+- Komunikasi dari dan ke dalam AVR via bit serial
+- Standar komunikasi sistem *embedded*
+- Sangat fleksibel dan *powerfull*
+- Lihat pada Bab 20. USART0
+
+---
+
+# Fitur
+
+- Full Duplex Operation (Independent Serial Receive and Transmit Registers)
+- Asynchronous or Synchronous Operation
+- Master or Slave Clocked Synchronous Operation
+- High Resolution Baud Rate Generator
+- Supports Serial Frames with 5, 6, 7, 8, or 9 Data Bits and 1 or 2 Stop Bits
+- Odd or Even Parity Generation and Parity Check Supported by Hardware
+- Data OverRun Detection
+
+---
+
+# Fitur
+
+- Framing Error Detection
+- Noise Filtering Includes False Start Bit Detection and Digital Low Pass Filter
+- Three Separate Interrupts on TX Complete, TX Data Register Empty and RX Complete
+- Multi-processor Communication Mode
+- Double Speed Asynchronous Communication Mode
+
+---
+
+# Register
+
+- Pilih *clock/xrystal* dengan *error baudrate* yang masih dapat ditoleransi
+- Lihat di **Table 20-4. Examples of UBRRn Settings for Commonly Used Oscillator Frequencies**
+- **Error Rate <= 5%**
