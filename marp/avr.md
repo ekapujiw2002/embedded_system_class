@@ -228,3 +228,75 @@ int main(){
 - Pilih *clock/xrystal* dengan *error baudrate* yang masih dapat ditoleransi
 - Lihat di **Table 20-4. Examples of UBRRn Settings for Commonly Used Oscillator Frequencies**
 - **Error Rate <= 5%**
+
+---
+
+# Timer
+
+- Pewaktu
+- Tipe : 8bit dan 16bit
+	- 8bit : **TIMER0, TIMER2**
+	- 16bit : **TIMER1**
+- Input (internal dan eksternal)
+- Output (internal dan eksternal)
+
+---
+
+# TIMER0
+
+- Referensi : **15. 8-bit Timer/Counter0 with PWM**
+- 8bit
+- 2 kanal PWM
+- 1 kanal **capture external**
+- Register :
+	- OCR0A, OCR0B
+	- OC0A, OC0B
+	- TCCR0A, TCCR0B
+	- TCNT0
+	- TOV0
+
+---
+
+# TIMER0
+
+|MODE|FUNGSI|
+|---|---|
+|NORMAL|Pewaktu biasa|
+|CTC|Clock generator|
+|FAST PWM|PWM kasar|
+|PHASE CORRECT|PWM smooth|
+
+---
+
+# TIMER0 : MODE NORMAL
+
+- Pewaktu
+- Cacahan : 0 - 255
+- `Waktu tunda = (PSC / XTAL) * CNT`
+	- XTAL = kristal (Hz)
+	- PSC = prescalar : 1,8,64,256,1024
+	- CNT = nilai cacahan yang diperlukan
+	- Waktu tunda dalam detik
+- Contoh :
+```
+Waktu tunda = 10ms = 10*10^-3 detik = 10^-2 detik
+10^-2 = (1 / 16*10^6) * CNT ==> CNT = 160000 ==> >255
+PSC = 1024 ==> CNT = 156,25
+CNT = 156 ==> Waktu tunda = 9,984ms
+CNT = 157 ==> Waktu tunda = 10,084ms
+
+Waktu tunda 10ms, PSC=1024, XTAL=16MHz, CNT=156
+Nilai yang harus diset = 256-156 = 100 = TCNT0
+```
+---
+
+# TIMER0 : MODE NORMAL
+
+- Referensi : **15.9 Register Description dan Table 15-8. Waveform Generation Mode Bit Description**
+- Set value register 
+```
+TCCR0A = 0
+TCCR0B = PSC
+TCNT0 = Nilai waktunya
+TOV0 = penanda akhir waktunya
+```
