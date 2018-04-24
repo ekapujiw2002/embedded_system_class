@@ -1,0 +1,30 @@
+{
+    "name": "FreeRTOS_AVR", 
+    "repository": {
+        "url": "https://github.com/greiman/FreeRTOS-Arduino.git", 
+        "type": "git"
+    }, 
+    "platforms": [
+        "atmelavr"
+    ], 
+    "frameworks": [
+        "arduino"
+    ], 
+    "version": "5d410b29e6", 
+    "export": {
+        "include": "libraries/FreeRTOS_AVR"
+    }, 
+    "authors": [
+        {
+            "maintainer": false, 
+            "name": "Bill Greiman", 
+            "url": "https://github.com/greiman", 
+            "email": "fat16lib@sbcglobal.net"
+        }
+    ], 
+    "keywords": [
+        "rtos"
+    ], 
+    "id": 323, 
+    "description": "FreeRTOS for Arduino AVR boards"
+}
